@@ -4,27 +4,28 @@ import com.ttknp.springbootenablehttpscrudmysql.entity.Actor;
 import com.ttknp.springbootenablehttpscrudmysql.service.ActorService;
 import com.ttknpdev.constant.CommonStatus;
 import com.ttknpdev.entity.ResponseObject;
-import com.ttknpdev.logging.MyLog4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(originPatterns = "http://localhost:4200")
 public class EndpointController {
-    private MyLog4j log4j;
-    private ActorService actorService;
+
+    private static final Logger log = LoggerFactory.getLogger(EndpointController.class);
+    private final ActorService actorService;
 
     @Autowired
     public EndpointController(ActorService actorService) {
-        log4j=new MyLog4j(EndpointController.class);
         this.actorService = actorService;
     }
 
     @GetMapping(value = "/server")
     private ResponseEntity<ResponseObject> server() {
-        log4j.log.warn("{}","req api/server");
+        log.warn("{}","req api/server");
         return ResponseEntity.ok(
                 ResponseObject
                         .<String>builder()
@@ -38,7 +39,7 @@ public class EndpointController {
 
     @GetMapping(value = "/actor/")
     private ResponseEntity<ResponseObject> getAllActors() {
-        log4j.log.warn("{}","req api/actor/reads");
+        log.warn("{}","req api/actor/reads");
         return ResponseEntity.ok(
                 ResponseObject
                         .<Iterable<Actor>>builder()
@@ -51,7 +52,7 @@ public class EndpointController {
 
     @GetMapping(value = "/actor")
     private ResponseEntity<ResponseObject> getActor(@RequestParam("aid") Long aid) {
-        log4j.log.warn("{}","req api/actor?aid="+aid);
+        log.warn("{}","req api/actor?aid="+aid);
         return ResponseEntity.ok(
                 ResponseObject
                         .<Optional<Actor>>builder()
@@ -64,7 +65,7 @@ public class EndpointController {
 
     @PostMapping(value = "/actor")
     private ResponseEntity<ResponseObject> addActor(@RequestBody Actor actor) {
-        log4j.log.warn("{}","req (POST) api/actor");
+        log.warn("{}","req (POST) api/actor");
         return ResponseEntity.ok(
                 ResponseObject
                         .<Boolean>builder()
@@ -77,7 +78,7 @@ public class EndpointController {
 
     @PutMapping(value = "/actor")
     private ResponseEntity<ResponseObject> editActor(@RequestBody Actor actor,@RequestParam Long aid) {
-        log4j.log.warn("{}","req (PUT) api/actor");
+        log.warn("{}","req (PUT) api/actor");
         return ResponseEntity.ok(
                 ResponseObject
                         .<Boolean>builder()
@@ -90,7 +91,7 @@ public class EndpointController {
 
     @DeleteMapping(value = "/actor")
     private ResponseEntity<ResponseObject> removeActor(@RequestParam Long aid) {
-        log4j.log.warn("{}","req (DELETE) api/actor");
+        log.warn("{}","req (DELETE) api/actor");
         return ResponseEntity.ok(
                 ResponseObject
                         .<Boolean>builder()

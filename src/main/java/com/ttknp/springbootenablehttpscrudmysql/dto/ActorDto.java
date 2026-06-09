@@ -5,13 +5,12 @@ import com.ttknp.springbootenablehttpscrudmysql.repo.ActorRepo;
 import com.ttknp.springbootenablehttpscrudmysql.service.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ActorDto implements ActorService {
-    private ActorRepo actorRepo;
+
+    private final ActorRepo actorRepo;
 
     @Autowired
     public ActorDto(ActorRepo actorRepo) {

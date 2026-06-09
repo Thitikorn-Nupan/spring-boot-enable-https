@@ -6,9 +6,9 @@ import java.util.Optional;
 
 
 public interface ActorService {
-    public Iterable<Actor> getAllActors();
-    public Optional<Actor> getActor(Long aid);
-    public Boolean addActor(Actor actor);
-    public Boolean editActor(Actor actor,Long aid);
-    public Boolean removeActor(Long aid);
+    Iterable<Actor> getAllActors();
+    Optional<Actor> getActor(Long aid);
+    Boolean addActor(Actor actor);
+    Boolean editActor(Actor actor,Long aid);
+    Boolean removeActor(Long aid);
 }
